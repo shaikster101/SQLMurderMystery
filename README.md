@@ -42,21 +42,45 @@ WHERE address_street_name='Northwestern Dr' OR address_street_name='Franklin Ave
 
 ## Part 3: Catching the murderer
 
-The witness interviews revealed 2 key pieces of information. A partial for a licence plate and a gold tier gym membership account number
+The witness interviews revealed 2 key pieces of information. A partial for a licence plate and a gold tier gym member ship account number
 
-Relying on a little bit of luck I used the partial license plate and queried for people with a gym member ship who had a matching partial licence plate that led me to the murdered. 
+Using the partial license plate and gym id. I queried for people with a gym membership who had a matching partial licence plate which led me to the murdered. 
 
 
 ```
-SELECT p.name 
-FROM person p
+SELECT gf.name
+FROM get_fit_now_check_in gi
 JOIN get_fit_now_member gf
-ON gf.person_id = p.id
-JOIN drivers_license d
-ON p.license_id = d.id
-WHERE d.plate_number like '%H42W%'
+on gf.id = gi.membership_id
+JOIN person p
+on gf.person_id = p.id
+JOIN drivers_license dl
+on p.license_id = dl.id
+where dl.plate_number like '%H42W%' and gf.id like '%48Z%'
 ```
 
 ## The murderer was `Jeremy Bowers`
 
+---
 
+# Bonus: Finding the actual master mind
+
+After finding the murdered, we get another hint about the master mind of the murder. To find him/her we must look at the interview transcript of Jeremy Bowers
+
+After looking at the trascript we find details about the masterminds facebook events, height, hair color and car model. 
+
+I found the master mind using the following query
+
+```
+SELECT name
+FROM person p 
+JOIN drivers_license dl
+ON p.license_id = dl.id
+JOIN facebook_event_checkin fb
+ON p.id = fb.person_id
+where dl.hair_color = 'red' and height between 65 and 67 
+AND car_make = 'Tesla' AND event_name = 'SQL Symphony Concert'
+GROUP BY name HAVING COUNT(*)>2
+```
+
+## The mastermind was `Miranda Priestly`
