@@ -51,12 +51,12 @@ Using the partial license plate and gym id. I queried for people with a gym memb
 SELECT gf.name
 FROM get_fit_now_check_in gi
 JOIN get_fit_now_member gf
-on gf.id = gi.membership_id
+ON gf.id = gi.membership_id
 JOIN person p
-on gf.person_id = p.id
+ON gf.person_id = p.id
 JOIN drivers_license dl
-on p.license_id = dl.id
-where dl.plate_number like '%H42W%' and gf.id like '%48Z%'
+ON p.license_id = dl.id
+WHERE dl.plate_number LIKE '%H42W%' AND gf.id LIKE '%48Z%'
 ```
 
 ## The murderer was `Jeremy Bowers`
