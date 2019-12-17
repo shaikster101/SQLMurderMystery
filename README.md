@@ -42,9 +42,9 @@ WHERE address_street_name='Northwestern Dr' OR address_street_name='Franklin Ave
 
 ## Part 3: Catching the murderer
 
-The witness interviews revealed 2 key pieces of information. A partial for a licence plate and a gold tier gym member ship account number
+The witness interviews revealed 2 key pieces of information. A partial for a licence plate and a gold tier gym membership account number
 
-Relying on a little bit of luck I used the partial license plate and queried for people with a gym member ship who had a matching partial licence plate which led me to the murdered. 
+Relying on a little bit of luck I used the partial license plate and queried for people with a gym member ship who had a matching partial licence plate that led me to the murdered. 
 
 
 ```
